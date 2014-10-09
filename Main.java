@@ -2,7 +2,6 @@ package pkg3102hw;
 import java.util.*;
 import java.io.*;
 /**
- *
  * @author Hunter Crossett and Stephen Truong
  * @class CSC 3102 with Raul Shah Fall 2014
  * @purpose Implement K-ary heap and AVL Trees.
@@ -88,7 +87,17 @@ public class Main
         {
             try
             {
+                int[] something; //idk. what is life?
                 Scanner bodyScan = new Scanner(new File("KARYtree-input.txt")); //may not be right.
+                while(bodyScan.hasNext())
+                {
+                    String[] cheese = bodyScan.next().split(" ");
+                    if (cheese[0].equals("IN"))
+                        something.insert(cheese[1]);
+                    else
+                        something.extractMin(cheese[1]);
+                }
+                
             }catch (FileNotFoundException f) {System.out.println("Now this shit ain't right.");}
         
         }
