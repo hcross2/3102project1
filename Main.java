@@ -61,15 +61,29 @@ public class Main
     
     public class AVLtree 
     {
-        public int[] treesome; //this doesn't look right
+        public AVLtree root; // the 1st node   
+        public List<Integer> gun = new ArrayList<Integer>(); // lets try arraylist to add stuff
+        public int avlsize;
         
-        public void insert(int x) //x = key
+        public AVLtree()        
         {
+            root = null;
+        }
+        
+        public void insert(AVLtree x) //x = key < -- this thing has to be a node
+        {
+            if (root == null) // if theres nothing, add the new node
+                root = x;       
             
         }
         
-        public boolean search(int x) //x = key
+           
+        public boolean search(AVLtree root, int x) //x = key
         {
+            // this shit is probaly wrong
+            if (x == null)
+                return false;
+            if 
             return true;
         }
         
