@@ -51,7 +51,9 @@ public class Main
                 poop.set(0, poop.get(poop.size()-1));
                 poop.remove(poop.size()-1);
             }
-            // no fucking clue after this
+            // swap item/key w/ the child that has the lesser key 
+        // repeat this until heap-order achieved
+        // return the item originally at root
                        
             
             return min;
