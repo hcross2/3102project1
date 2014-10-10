@@ -21,26 +21,25 @@ public class Main
             this.x = x;
         }
         
-        public void insert(int x) //key
+        public void insert(Integer x) //key
+    {
+        poop.add(x); // add element to the end
+        int m = poop.size()-1; // and find the location of that element
+        if (m == 0)
+            return;
+        int index = ((int) Math.floor(((double) m-1)/x)); // index of parent
+        //compare & swap parent until not bigger
+        while(m!=0  &&(poop.get(m) < poop.get(index) )) // comparing nodes, maybe theres a better way
         {
-            poop.add(x); // add element to the end
-            int m = poop.size()-1; // and find the location of that element
-            if (m == 0)
-                return;
-            //Math.floor: Returns the largest (closest to positive infinity) double value 
-            //that is less than or equal to the argument and is equal to a mathematical integer.
-            // I found that formula somehwere
-            while(m!=0  &&(poop.get(m) < poop.get(((int) Math.floor(((double) m-1)/x)))) ) // comparing nodes, maybe theres a better way
-            {
-                int par = ((int) Math.floor(((double) m-1)/x)); // the new node that will be swapped
-                int tempp = poop.get(m);
-                poop.set(m, poop.get(par)); // starting to swap stuff
-                poop.set(par, tempp);
-                m = par;
-            }
+            int par = ((int) Math.floor(((double) m-1)/x)); // the new node that will be swapped
+            int temp = poop.get(m);	// starting to swap stuff
+            poop.set(m, poop.get(par)); 
+            poop.set(par, temp);
+            m = par;
         }
+    }
         
-        public int extractMin() //removes and returns the element of heap with the smallest key
+        public Integer extractMin() //removes and returns the element of heap with the smallest key
         {
             int min = poop.get(0); // sets min to first node
             if (poop.size() <= 0)
