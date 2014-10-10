@@ -2,7 +2,7 @@ package pkg3102hw;
 import java.util.*;
 import java.io.*;
 /**
- * @author Hunter Crossett and Stephen Truong
+ * @author Hunter Crossett and Steven Truong
  * @class CSC 3102 with Raul Shah Fall 2014
  * @purpose Implement K-ary heap and AVL Trees.
  * @naming Lots of puns. Please do not count off for pun variables.
@@ -70,7 +70,7 @@ public class Main
             root = null;
         }
         
-        public void insert(AVLtree x) //x = key < -- this thing has to be a node
+        public void insert(AVLtree x) //might need a Node*x and int somethign
         {
             if (root == null) // if theres nothing, add the new node
                 root = x;       
