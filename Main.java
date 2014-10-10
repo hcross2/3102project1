@@ -11,16 +11,50 @@ public class Main
 {
     public class kAry
     {
-        public int[] somethingOrOther;
+        //public int[] heap;
+        public List<Integer> poop = new ArrayList<Integer>(); // lets try arraylist to add stuff
+        private int size;
+        private int x;
+        
+        public kAry(int x)
+        {
+            this.x = x;
+        }
         
         public void insert(int x) //key
         {
-            
+            poop.add(x); // add element to the end
+            int m = poop.size()-1; // and find the location of that element
+            if (m == 0)
+                return;
+            //Math.floor: Returns the largest (closest to positive infinity) double value 
+            //that is less than or equal to the argument and is equal to a mathematical integer.
+            // I found that formula somehwere
+            while(m!=0  &&(poop.get(m) < poop.get(((int) Math.floor(((double) m-1)/x)))) ) // comparing nodes, maybe theres a better way
+            {
+                int par = ((int) Math.floor(((double) m-1)/x)); // the new node that will be swapped
+                int tempp = poop.get(m);
+                poop.set(m, poop.get(par)); // starting to swap stuff
+                poop.set(par, tempp);
+                m = par;
+            }
         }
         
         public int extractMin() //removes and returns the element of heap with the smallest key
         {
-            int min = 0;
+            int min = poop.get(0); // sets min to first node
+            if (poop.size() <= 0)
+                return -9999;
+            if (poop.size() == 1)
+                poop.remove(0);
+            else
+            {
+                poop.set(0, poop.get(poop.size()-1));
+                poop.remove(poop.size()-1);
+            }
+            // no fucking clue after this
+                       
+            
             return min;
         }
     }
