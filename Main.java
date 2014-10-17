@@ -11,40 +11,38 @@ public class Main
 {
     public class Node // should i make something like Node(node , key)?
     {
-        int data;
-        Node right = null;
-        Node left = null;
-        Node parent;        
-        int numNodes = 0;
-        int height = 1;
+        private int data;
+        private Node right = null;
+        private Node left = null;
+        private Node parent = null;        
+        private int height;
+        private int balance = 0;
         Node(int data)
         {
             this.data = data;
-            numNodes++;
         }
     }
     public class kAry
     {
         //public int[] heap;
         public List<Integer> poop = new ArrayList<Integer>(); // lets try arraylist to add stuff
-                
         public void insert(int x) //key
-    {
-        poop.add(x); // add element to the end
-        int m = poop.size()-1; // and find the location of that element
-        if (m == 0)
-            return;
-        int index = ((int) Math.floor(((double) m-1)/x)); // index of parent
-        //compare & swap parent until not bigger
-        while(m!=0  &&(poop.get(m) < poop.get(index) )) // comparing nodes, maybe theres a better way
         {
-            int par = ((int) Math.floor(((double) m-1)/x)); // the new node that will be swapped
-            int temp = poop.get(m);	// starting to swap stuff
-            poop.set(m, poop.get(par)); 
-            poop.set(par, temp);
-            m = par;
+            poop.add(x); // add element to the end
+            int m = poop.size()-1; // and find the location of that element
+            if (m == 0)
+                return;
+            int index = ((int) Math.floor(((double) m-1)/x)); // index of parent
+            //compare & swap parent until not bigger
+            while(m!=0  &&(poop.get(m) < poop.get(index) )) // comparing nodes, maybe theres a better way
+            {
+                int par = ((int) Math.floor(((double) m-1)/x)); // the new node that will be swapped
+                int temp = poop.get(m);	// starting to swap stuff
+                poop.set(m, poop.get(par)); 
+                poop.set(par, temp);
+                m = par;
+            }
         }
-    }
         
         public Integer extractMin() //removes and returns the element of heap with the smallest key
         {
@@ -95,22 +93,28 @@ public class Main
             return current;
         }
         
-        public void insert(int data) //might need a Node*x and int somethign
+        public void insert(int data) //might need a Node*x and int somethign <= not in java!
         {
-            Node node = new Node(data); // made some node
-            if (root == null) // if theres nothing, add the new node
-                root = node;
+            Node newNode = new Node(data); // made a new node
+            if (root == null) // if theres nothing, add the new nod
+            {
+                root = newNode; //updates root.
+                newNode.height = 1; // root has height 1                
+            }
             else
             {
                 current = root;
-                while (true) // this keeps going until 1 of those breaks
+                boolean placement = true;
+                while (placement) // this keeps going until 1 of these breaks
                 {
-                    if (data < current.data)  // doing the left
+                    if (newNode.data < current.data)  // doing the left
                     {
                         if (current.left == null) // nothing, then add
                         {
-                            current.left = node;
-                            break;
+                            current.left = newNode;
+                            placement = false;
+                            newNode.parent = current;
+                            newNode.height = newNode.parent.height + 1;
                         }
                         else
                             current = current.left;
@@ -119,8 +123,10 @@ public class Main
                     {
                         if (current.right == null) // doing the right, nothing then add
                         {
-                            current.right = node;
-                            break;
+                            current.right = newNode;
+                            placement = false;
+                            newNode.parent = current;
+                            newNode.height = newNode.parent.height + 1;
                         }
                         else
                             current = current.right;
