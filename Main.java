@@ -9,19 +9,26 @@ import java.io.*;
  */
 public class Main 
 {
+    public class Node // should i make something like Node(node , key)?
+    {
+        int data;
+        Node right = null;
+        Node left = null;
+        Node parent;        
+        int numNodes = 0;
+        int height = 1;
+        Node(int data)
+        {
+            this.data = data;
+            numNodes++;
+        }
+    }
     public class kAry
     {
         //public int[] heap;
         public List<Integer> poop = new ArrayList<Integer>(); // lets try arraylist to add stuff
-        private int size;
-        private int x;
-        
-        public kAry(int x)
-        {
-            this.x = x;
-        }
-        
-        public void insert(Integer x) //key
+                
+        public void insert(int x) //key
     {
         poop.add(x); // add element to the end
         int m = poop.size()-1; // and find the location of that element
@@ -53,8 +60,7 @@ public class Main
             }
             // swap item/key w/ the child that has the lesser key 
         // repeat this until heap-order achieved
-        // return the item originally at root
-                       
+        // return the item originally at root                      
             
             return min;
         }
@@ -62,35 +68,113 @@ public class Main
     
     public class AVLtree 
     {
-        public AVLtree root; // the 1st node   
-        public List<Integer> gun = new ArrayList<Integer>(); // lets try arraylist to add stuff
-        public int avlsize;
+        public Node root; // the 1st node
+        public Node current;
+        public List<Integer> gun = new ArrayList<Integer>(); // lets try arraylist to add stuff  
         
-        public AVLtree()        
+        public int balanceFact(Node current) // making life ez
         {
-            root = null;
+            if (current == null)
+                    return 0;
+            return(height(current.left) - height(current.right));
         }
         
-        public void insert(AVLtree x) //might need a Node*x and int somethign
+        public int height(Node current) // making life ez
         {
+            if (current == null)
+                return 0;
+            return current.height;
+        }
+        
+        public Node minValue (Node current) // making life ez
+        {
+            
+            while (current.left != null)            
+                current = current.left;
+           
+            return current;
+        }
+        
+        public void insert(int data) //might need a Node*x and int somethign
+        {
+            Node node = new Node(data); // made some node
             if (root == null) // if theres nothing, add the new node
-                root = x;       
+                root = node;
+            else
+            {
+                current = root;
+                while (true) // this keeps going until 1 of those breaks
+                {
+                    if (data < current.data)  // doing the left
+                    {
+                        if (current.left == null) // nothing, then add
+                        {
+                            current.left = node;
+                            break;
+                        }
+                        else
+                            current = current.left;
+                    }
+                    else
+                    {
+                        if (current.right == null) // doing the right, nothing then add
+                        {
+                            current.right = node;
+                            break;
+                        }
+                        else
+                            current = current.right;
+                    }
+                }
+            }
+            // time to fix & check balance factors
+            int bal = balanceFact(current);
+            //zig zig or left left
+            if (bal > 1 && data < current.left.data)
+                return ROTATE_RIGHT(current);  /// HAVE TO RIGHT ROTATE
+            //zig zig or right right
+            if (bal < -1 && data > current.right.data)
+                return ROTATE_LEFT(current);
+            //zig zag || left right
+            if ( bal > 1 && data > current.left.data)
+            {
+               current.left = ROTATE_LEFT(current.left);
+               return ROTATE_RIGHT(current);
+            } 
+            //zig zag || right left
+            if ( bal < -1 && data < current.right.data)
+            {
+                current.right = ROTATE_RIGHT(current.right);
+                return ROTATE_LEFT(current);
+            }
             
         }
         
            
-        public boolean search(AVLtree root, int x) //x = key
+        public boolean search(Node root, int x) //x = key
         {
             // this shit is probaly wrong
-            if (x == null)
+            if (node == null)
                 return false;
             if 
             return true;
         }
         
-        public int successor(int x) //key
+        public Node successor(Node root, Node x) //key
         {
-            return 1;
+            if (current.right != null)  // if Rsub != null, succ in Rsub
+                return minValue (x.right);
+            
+            //setting that node as the par & we start going up
+            //the parent pointer u ntil we see a node which is 
+            //Left child of it's parent. That parent node == successor.
+            Node suc = x.parent;
+            while( suc != null &&  x == suc.right) // is this right wtf
+            {
+                x = suc;
+                suc = suc.parent;
+            }
+            return suc;
         }
         
         public int select(int x) // key
