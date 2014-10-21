@@ -265,9 +265,10 @@ public class Main {
 			return x;
 	}
 
-        public void insert(Node x, int data) //ADDED NODE X
+        public void insert(int data) //ADDED NODE X
                 // X REPLACED CURRENT
         {
+            Node x;
             Node newNode = new Node(data); // made a new node
             if (root == null) // if theres nothing, add the new nod
             {
@@ -466,21 +467,23 @@ public class Main {
         if (debugAVL) {
             try {
                 Scanner MRIscan = new Scanner(new File("AVLtree-input.txt"));
-                while (MRIscan.hasNext()) {
-                    int[] treesome; //idk what I am doing
-                    String[] beans = MRIscan.next().split(" ");
-                    if (beans[0].equals("IN")) {
-                        treesome.insert(Integer.parseInt(beans[1]));//insert call
-                    } else if (beans[0].equals("SR")) {
-                        treesome.search(beans[1]);
-                    } else if (beans[0].equals("SC")) {
-                        treesome.successor(beans[1]);
-                    } else if (beans[0].equals("SE")) {
-                        treesome.search(beans[1]);
-                    } else {
-                        treesome.rank(beans[1]);
+                    String[] treesome = MRIscan.next().split(" ");
+                    for (int j = 0; j < treesome.length(); j++)
+                    {
+                        if (treesome[j].equals("IN")) 
+                        {
+                            avl.insert(Integer.parseInt(treesome[j+1])); j++; 
+                        }
+                        else if (treesome[j].equals("SR")) 
+                            treesome.search(trees[1]);
+                        else if (treesome[j].equals("SC")) 
+                            treesome.successor(beans[1]);
+                        else if (treesome[j].equals("SE")) 
+                            treesome.search(beans[1]);
+                        else 
+                            treesome.rank(beans[1]);
                     }
-                }
+                
             } catch (FileNotFoundException e) {
                 System.out.println("This shit ain't here");
             }
