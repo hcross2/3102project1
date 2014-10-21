@@ -25,11 +25,10 @@ public class Main {
         }
     }
 
-    public class kAry 
+    public class kAry //need to fix this shit
     {
         private int x;
-        public List<Integer> poop = new ArrayList<Integer>(); // lets try arraylist to add stuff
-        
+        public int[] poop = new int[2];
         public kAry(int x)
         {
             //this.x = x;
@@ -38,7 +37,7 @@ public class Main {
         public void insert(int x) //key
         {
             poop.add(x); // add element to the end
-            int m = poop.size() - 1; // and find the location of that element
+            int m = poop.size - 1; // and find the location of that element
             if (m == 0) {
                 return;
             }
