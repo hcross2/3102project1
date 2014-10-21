@@ -13,15 +13,15 @@ public class Main {
 
     public class Node 
     {
-        public int height, balance, size, data; //Steven, use only one line to declare all these
+        private int height, balance, size, data; //These are private, as in belong to the node
         public Node right = null, left = null, parent = null;
 
-        Node(int data) 
+        Node(int input) 
         {
-            this.data = data;
-            this.height = 0;
-            this.balance = 0;
-            this.size = 1;
+            data = input;
+            height = 0;
+            balance = 0;
+            size = 1;
         }
     }
 
@@ -426,7 +426,7 @@ public class Main {
 			else 
 				return x;			
 		}
-		return x = null;
+		return x = null; //useless bu netbeans yells at us without it
 	}
     }
 
