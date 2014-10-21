@@ -8,6 +8,7 @@ import java.io.*;
  * @purpose Implement K-ary heap and AVL Trees.
  * @naming Lots of puns. Please do not count off for pun variables.
  */
+
 public class Main {
 
     public class Node 
@@ -474,29 +475,19 @@ public class Main {
                     for (int j = 0; j < treesome.length; j++)
                     {
                         if (treesome[j].equals("IN")) 
-                        {
-                            avl.insert(Integer.parseInt(treesome[j+1])); j++; 
-                        }
+                        { avl.insert(Integer.parseInt(treesome[j+1])); j++; }
                         else if (treesome[j].equals("SR"))
-                        {
-                            avl.search(Integer.parseInt(treesome[j+1])); j++;
-                        }
+                        { avl.search(Integer.parseInt(treesome[j+1])); j++; }
                         else if (treesome[j].equals("SC")) 
-                        {
-                            avl.successor(Integer.parseInt(treesome[j+1])); j++;
-                        }
+                        { avl.successor(Integer.parseInt(treesome[j+1])); j++; }
                         else if (treesome[j].equals("SE")) 
-                        {
-                            avl.search(Integer.parseInt(treesome[j+1])); j++;
-                        }
+                        { avl.search(Integer.parseInt(treesome[j+1])); j++; }
                         else 
-                        {
-                            avl.rank(Integer.parseInt(treesome[j+1])); j++;
-                        }
+                        { avl.rank(Integer.parseInt(treesome[j+1])); j++; }
                     }
                 
             } catch (FileNotFoundException e) {
-                System.out.println("This shit ain't here");
+                System.out.println("Aint never no file ain't not none here");
             }
         }
 
