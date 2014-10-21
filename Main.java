@@ -13,13 +13,8 @@ public class Main {
 
     public class Node 
     {
-        public int data;
-        public Node right = null;
-        public Node left = null;
-        public Node parent = null;
-        public int height;
-        public int balance;
-        public int size;
+        public int height, balance, size, data; //Steven, use only one line to declare all these
+        public Node right = null, left = null, parent = null;
 
         Node(int data) 
         {
@@ -420,7 +415,7 @@ public class Main {
                 return null;// index i out of bounds            
         }
 
-        public Node successor(int data) 
+        public Node successor(int data) //double check this function
         {
 		Node newNode = goGet(root, data);
 		if (newNode.right != null) // go down and right
