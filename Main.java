@@ -399,7 +399,7 @@ public class Main {
 		return rank;
 	}
 
-        public Node select(Node x, int i) 
+        public Node select(Node x, int i) //I don't like the node requirement, but let's try it out.
         { // its just like the slides
             if (i <= root.size) 
             {
@@ -476,7 +476,9 @@ public class Main {
                         else if (treesome[j].equals("SC")) 
                         { avl.successor(Integer.parseInt(treesome[j+1])); j++; }
                         else if (treesome[j].equals("SE")) 
-                        { avl.search(Integer.parseInt(treesome[j+1])); j++; }
+                        { 
+                            Node x = new Node(Integer.parseInt(treesome[j+1])); //This is the problem! IDK if we can do this properly
+                            avl.select(x,Integer.parseInt(treesome[j+1])); j++; }
                         else 
                         { avl.rank(Integer.parseInt(treesome[j+1])); j++; }
                     }
