@@ -11,18 +11,18 @@ import java.io.*;
  */
 public class Main {
 
-    public class Node // should i make something like Node(node , key)?
+    public class Node 
     {
+        public int data;
+        public Node right = null;
+        public Node left = null;
+        public Node parent = null;
+        public int height;
+        public int balance;
+        public int size;
 
-        private int data;
-        private Node right = null;
-        private Node left = null;
-        private Node parent = null;
-        private int height;
-        private int balance;
-        private int size;
-
-        Node(int data) {
+        Node(int data) 
+        {
             this.data = data;
             this.height = 0;
             this.balance = 0;
@@ -137,8 +137,8 @@ public class Main {
         }
     }
 
-    public class AVLtree 
-    {
+    public class AVLtree {
+        
         public Node root; // the 1st node
         public boolean heightChange = false;
 
@@ -184,8 +184,7 @@ public class Main {
 			if (x.parent.left == x) 
 				y.parent.left = y;
 			else
-				y.parent.right = y;
-			
+				y.parent.right = y;			
 		} 
                 else 
                 {
@@ -400,20 +399,20 @@ public class Main {
 		return rank;
 	}
 
-        public Node select(Node x, int i, int r) 
+        public Node select(Node x, int i) 
         { // its just like the slides
-            if (i <= root.size) {
-                if (x.left != null && x.left.size + r >= i) {
+            if (i <= root.size) 
+            {
+                if (x.left != null && x.left.size >= i) 
                     // we're going left
-                    return select(x.left, i, r);
-                } else if ((x.left != null ? x.left.size : 0) + r + 1 < i) {
-                    return select(x.right, i, 1 + r + x.left.size);
-                } else {
-                    return x;
-                }
-            } else {
-                return null;// index i out of bounds
-            }
+                    return select(x.left, i); 
+                else if (x.left.size +1 == i)
+                    return x;                 
+                else 
+                    return select(x.right, i-1-(x.left.size));
+            } 
+            else 
+                return null;// index i out of bounds            
         }
 
         public Node successor(int data) 
@@ -463,6 +462,7 @@ public class Main {
     public static void main(String[] args) {
         boolean debugAVL = true;
         boolean debugKary = false;
+        AVLtree avl = new AVLtree();
         if (debugAVL) {
             try {
                 Scanner MRIscan = new Scanner(new File("AVLtree-input.txt"));
