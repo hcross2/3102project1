@@ -361,22 +361,19 @@ public class Main {
         public String search(int data) //is this better than using searc(node, data)?
         {
             Node x = root;
-            if (x != null) 
+            while (true)
             {
-                if (data > x.data) 
+                if (x != null) 
                 {
+                    if (data > x.data) 
                     x = x.right; 
-                    return search(data);
-                }
                 else if (data < x.data)
-                {
                     x = x.left;
-                    return search(data);
-                }
                 else 
                     return "TRUE";                
+                }
+                return "FALSE";
             }
-            return "FALSE";
         }
         
         public int rank(int data) 
