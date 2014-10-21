@@ -32,7 +32,7 @@ public class Main {
         
         public kAry(int x)
         {
-            this.x = x;
+            //this.x = x;
         }
         
         public void insert(int x) //key
