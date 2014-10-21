@@ -359,18 +359,25 @@ public class Main {
             } while (x != null);
         }
 
-        public boolean search(Node x, int data) 
+        public String search(int data) //is this better than using searc(node, data)?
         {
+            Node x = root;
             if (x != null) 
             {
                 if (data > x.data) 
-                    return search(x.right, data);
+                {
+                    x = x.right; 
+                    return search(data);
+                }
                 else if (data < x.data)
-                    return search(x.left, data);
+                {
+                    x = x.left;
+                    return search(data);
+                }
                 else 
-                    return true;                
+                    return "TRUE";                
             }
-            return false;
+            return "FALSE";
         }
         
         public int rank(int data) 
@@ -463,25 +470,33 @@ public class Main {
     public static void main(String[] args) {
         boolean debugAVL = true;
         boolean debugKary = false;
-        AVLtree avl = new AVLtree();
+        AVLtree avl = new AVLtree(); //wtf?
         if (debugAVL) {
             try {
                 Scanner MRIscan = new Scanner(new File("AVLtree-input.txt"));
-                    String[] treesome = MRIscan.next().split(" ");
-                    for (int j = 0; j < treesome.length(); j++)
+                    String[] treesome = MRIscan.next().split(" "); // need to find a better way to read in file
+                    for (int j = 0; j < treesome.length; j++)
                     {
                         if (treesome[j].equals("IN")) 
                         {
                             avl.insert(Integer.parseInt(treesome[j+1])); j++; 
                         }
-                        else if (treesome[j].equals("SR")) 
-                            treesome.search(trees[1]);
+                        else if (treesome[j].equals("SR"))
+                        {
+                            avl.search(Integer.parseInt(treesome[j+1])); j++;
+                        }
                         else if (treesome[j].equals("SC")) 
-                            treesome.successor(beans[1]);
+                        {
+                            avl.successor(Integer.parseInt(treesome[j+1])); j++;
+                        }
                         else if (treesome[j].equals("SE")) 
-                            treesome.search(beans[1]);
+                        {
+                            avl.search(Integer.parseInt(treesome[j+1])); j++;
+                        }
                         else 
-                            treesome.rank(beans[1]);
+                        {
+                            avl.rank(Integer.parseInt(treesome[j+1])); j++;
+                        }
                     }
                 
             } catch (FileNotFoundException e) {
