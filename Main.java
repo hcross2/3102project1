@@ -34,41 +34,6 @@ public class Main {
         {
             this.x = x;
         }
-
-//        public void siftDown(int index) {
-//            /* will cycle through all children of heap[index] */
-//            int min = index;
-//            for (int i = 1; i <= k; i++) {
-//                int childIndex = k * index + i;
-//                if (childIndex < size) { // index inside current heap
-//                    if (heap[childIndex] < heap[min]) {
-//                        min = childIndex;
-//                    }
-//                }
-//            }
-//            if (min != index) {
-//                swap(min, index);
-//                siftDown(min);
-//            }
-//        }
-//    }
-
-//        public int extractMin() throws FileNotFoundException {
-//            long startTime = System.nanoTime();
-//            int min = heap[0];
-//            heap[0] = heap[size - 1];
-//            size--;
-//            siftDown(0);
-//            long endTime = System.nanoTime();
-//            if (DEBUG) {
-//                System.out.println(min + " new min = " + heap[0]);
-//            }
-//            if (DEBUG) {
-//                System.out.println("ExtractMin Time = " + ((endTime - startTime) / 1000));
-//            }
-//            return min;
-//        }
-
         
         public void insert(int x) //key
         {
@@ -462,25 +427,26 @@ public class Main {
     public static void main(String[] args) {
         boolean debugAVL = true;
         boolean debugKary = false;
-        AVLtree avl = new AVLtree(); //wtf?
+        AVLtree avl = new AVLtree(); //we need to write a constructor
         if (debugAVL) {
             try {
                 Scanner MRIscan = new Scanner(new File("AVLtree-input.txt"));
                     String[] treesome = MRIscan.next().split(" "); // need to find a better way to read in file
-                    for (int j = 0; j < treesome.length; j++)
+                    for (int j = 0; j < treesome.length; j+=2)
                     {
                         if (treesome[j].equals("IN")) 
-                        { avl.insert(Integer.parseInt(treesome[j+1])); j++; }
+                            avl.insert(Integer.parseInt(treesome[j+1]));
                         else if (treesome[j].equals("SR"))
-                        { avl.search(Integer.parseInt(treesome[j+1])); j++; }
+                            avl.search(Integer.parseInt(treesome[j+1]));
                         else if (treesome[j].equals("SC")) 
-                        { avl.successor(Integer.parseInt(treesome[j+1])); j++; }
+                            avl.successor(Integer.parseInt(treesome[j+1]));
                         else if (treesome[j].equals("SE")) 
                         { 
                             Node x = new Node(Integer.parseInt(treesome[j+1])); //This is the problem! IDK if we can do this properly
-                            avl.select(x,Integer.parseInt(treesome[j+1])); j++; }
+                            avl.select(x,Integer.parseInt(treesome[j+1]));
+                        }
                         else 
-                        { avl.rank(Integer.parseInt(treesome[j+1])); j++; }
+                            avl.rank(Integer.parseInt(treesome[j+1]));
                     }
                 
             } catch (FileNotFoundException e) {
@@ -488,16 +454,23 @@ public class Main {
             }
         }
 
-        if (debugKary) {
-            try {
-                int[] something; //idk. what is life?
+        if (debugKary) 
+        {
+            try 
+            {
+                kAry something = new kAry(); //still need to fix this shit
                 Scanner bodyScan = new Scanner(new File("KARYtree-input.txt")); //may not be right.
                 while (bodyScan.hasNext()) {
                     String[] cheese = bodyScan.next().split(" ");
-                    if (cheese[0].equals("IN")) {
-                        something.insert(cheese[1]);
-                    } else {
-                        something.extractMin(cheese[1]);
+                    for(int j = 0; j < cheese.length; j+=2)
+                    {
+                        if (cheese[0].equals("IN")) 
+                            something.insert(Integer.parseInt(cheese[j]));
+                        else 
+                        {
+                            j--;
+                            something.extractMin();
+                        }
                     }
                 }
 
