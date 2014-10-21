@@ -97,11 +97,17 @@ public class Main {
         }
     }
 
-    public class AVLtree {
+    public class AVLtree 
+    {
         
-        public Node root; // the 1st node
+        private Node root; // Should this node be private?
         public boolean heightChange = false;
 
+        public AVLtree()
+        {
+            root = null;
+        }
+        
         public void updateBalance(Node x)
         {
             int left, right;
@@ -480,5 +486,5 @@ public class Main {
 
         }
     }
-
+    
 }
